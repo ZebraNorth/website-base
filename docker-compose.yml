@@ -1,0 +1,22 @@
+services:
+    php:
+        build:
+            context: .
+            dockerfile: './php.dockerfile'
+        volumes:
+            - ./:/www
+
+    mysql:
+        image: 'mysql:8.2.0'
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+
+    apache:
+        build:
+            context: .
+            dockerfile: './apache.dockerfile'
+        ports:
+            - '80:80'
+            - '443:443'
+        volumes:
+            - ./:/www
